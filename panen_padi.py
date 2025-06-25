@@ -454,7 +454,7 @@ def main():
             with tab1_pso:
                 
                 # Jika file belum ada, unduh dari Google Drive
-                if not os.path.exists(model_path_pso) or os.path.getsize(model_path) == 0:
+                if not os.path.exists(model_path_pso) or os.path.getsize(model_path_pso) == 0:
                     with st.spinner("🔽 Mengunduh model hasil PSO dari Google Drive..."):
                         try:
                             import gdown
@@ -467,7 +467,7 @@ def main():
                 # Cek dan load file model PSO
                 if os.path.exists(model_path_pso):
                     try:
-                        with open(model_path, "rb") as f:
+                        with open(model_path_pso, "rb") as f:
                             model_data = pickle.load(f)
 
                         model_rf_pso = model_data.get("model")
