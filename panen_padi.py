@@ -271,11 +271,11 @@ def main():
         else:
             # Mapping rasio -> test_size dan file model
             rasio_opsi = {
-                "50:50": {"test_size": 0.5, "drive_id": "1rHVRZ9rR8UbMgG4ur4Uq69lh7b__i0vH"},
-                "60:40": {"test_size": 0.4, "drive_id": "1QkdiFoijSEOj8tE5Rc5-hTUb8s8RM64_"},
-                "70:30": {"test_size": 0.3, "drive_id": "1ze6iQyYKBLOX1kkOgD6mvjFy8o-jS8Om"}, 
-                "80:20": {"test_size": 0.2, "drive_id": "1EAbMoYPaDzTfT4PL4IcBt_L1cRwYhhjr"},
-                "90:10": {"test_size": 0.1, "drive_id": "1U_Gi0FFSGMrPQpRGIzEmA1ZoIjVi2OvX"},
+                "50:50": {"test_size": 0.5, "drive_id": "1Cybn-fysrB5iKi-C97cY1K1msrVHd9t0"},
+                "60:40": {"test_size": 0.4, "drive_id": "1s18g6ejJHYHBvEG2TMVadPH2Jy25Aasn"},
+                "70:30": {"test_size": 0.3, "drive_id": "1Wpui9thkor3rKsttbQpkMu67BM2ZigGL"}, 
+                "80:20": {"test_size": 0.2, "drive_id": "1vp1nBE3DKBoGpojDRY4V53V4LFmx2P_i"},
+                "90:10": {"test_size": 0.1, "drive_id": "1p0dtljJfEEoZTyEeMMywcgWKG0bJkMAB"},
             }
 
             # Pilihan rasio dari dropdown
@@ -419,11 +419,11 @@ def main():
 
             # Mapping rasio ke file model hasil optimasi
             rasio_opsi_pso = {
-                "50:50": "1Kax1ZcS0toPrQQR7KLZwCjZFBZ2MwezM",
-                "60:40": "1D9vyfEQ2Bi8wST39GkgmjNMOqeweRcQb",
-                "70:30": "1QJgDuqKUbizKyNLVCxtiaVvfjQeJSy_g",
-                "80:20": "1x-CBDynz1IGXFKlAtlGUlt7WYx21XVbi",
-                "90:10": "1lnY0GytPzY66S2JAMTdHWztTqiwcTCkm",
+                "50:50": "1CGxsRkMXRNVMAa6vvH5c_Si1G5o2dPO_",
+                "60:40": "1Qynex6zbi-ljxxgHESnWushrL5YOjwQ1",
+                "70:30": "1YetscjK9lYWeuPZIT2aNXOs33tasBv2C",
+                "80:20": "1DzaGfxAdg1ohNPxss_pLn9ukTlYJJJxh",
+                "90:10": "1LZqDyupjcoY_RO3BFFE7McREHv2A2P01",
             }
 
             # Dropdown untuk pilih rasio
