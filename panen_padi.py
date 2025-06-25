@@ -12,6 +12,11 @@ import os
 import altair as alt
 import gdown
 
+with open(model_path, "rb") as f:
+    model_data = pickle.load(f)
+    st.write("📦 Isi file:", model_data)
+
+
 # STREAMLIT
 def main():
     # Menampilkan gambar menggunakan st.image dengan pengaturan width
