@@ -299,6 +299,7 @@ def main():
                     if os.path.exists(model_path):
                         os.remove(model_path)
                     with st.spinner("🔽 Mengunduh model dari Google Drive..."):
+                        drive_id = selected_rasio["drive_id"]  # ← tambahkan ini dulu
                         url = f"https://drive.google.com/uc?id={drive_id}"
                         try:
                             import gdown
