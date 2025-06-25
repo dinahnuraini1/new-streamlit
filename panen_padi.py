@@ -467,7 +467,7 @@ def main():
                             st.error(f"Gagal mengunduh model dari Google Drive: {e}")
                 
                 # Cek dan load file model PSO
-                if os.path.exists(model_path) and os.path.getsize(model_path) > 0:
+                if os.path.exists(model_path):
                     try:
                         with open(model_path, "rb") as f:
                             model_data = pickle.load(f)
@@ -478,7 +478,7 @@ def main():
                         mape_train = model_data.get("mape_train")
                         mape_test = model_data.get("mape_test")
 
-                        if model_rf_pso and mape_train is not None and mape_test is not None:
+                        if model_rf_pso is not None and isinstance(params, dict) and isinstance(mape_train, (float, int)) and isinstance(mape_test, (float, int)):
                             st.subheader("📌 Parameter PSO")
                             st.markdown(f"**Partikel : 100**")
                             st.markdown(f"**Iterasi: 50**")
