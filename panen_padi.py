@@ -304,6 +304,8 @@ def main():
                         try:
                             import gdown
                             gdown.download(url, model_path, quiet=False, fuzzy=True)
+                        except Exception as e:
+                            st.error(f"Gagal mengunduh model: {e}")
 
                 if os.path.exists(model_path):
                     try:
