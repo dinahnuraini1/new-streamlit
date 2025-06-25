@@ -342,7 +342,7 @@ def main():
                             # if mape_test > 10:
                             #     st.warning("📈 MAPE Testing > 10%. Lakukan optimasi menggunakan PSO.")
                         else:
-                            st.error("Beberapa parameter model tidak ditemukan dalam file.")
+                            st.error("Beberapa parameter model tidak ditemukan dalam fileee.")
                     except Exception as e:
                         st.error(f"Terjadi kesalahan saat memuat model: {e}")
                 else:
