@@ -12,9 +12,11 @@ import os
 import altair as alt
 import gdown
 
-with open(model_path, "rb") as f:
-    model_data = pickle.load(f)
-    st.write("📦 Isi file:", model_data)
+# Fungsi untuk memuat objek dari file pickleAdd commentMore actions
+def load_pickle(file_path):
+    with open(file_path, 'rb') as file:
+        obj = pickle.load(file)
+    return obj
 
 
 # STREAMLIT
