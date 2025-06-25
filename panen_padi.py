@@ -450,26 +450,26 @@ def main():
                 model_dir = "model"
                 os.makedirs(model_dir, exist_ok=True)
                 filename = f"rfpso_{selected_rasio_label.replace(':', '').replace('/', '')}.pkl"
-                model_path_pso = os.path.join(model_dir, filename)
+                model_path = os.path.join(model_dir, filename)
                 drive_id = rasio_opsi_pso[selected_rasio_label]
 
                 # Jika file belum ada, unduh dari Google Drive
-                if not os.path.exists(model_path_pso) or os.path.getsize(model_path_pso) == 0:
-                    if os.path.exists(model_path_pso):
-                        os.remove(model_path_pso)  # hapus file kosong
+                if not os.path.exists(model_path) or os.path.getsize(model_path) == 0:
+                    if os.path.exists(model_path):
+                        os.remove(model_path)  # hapus file kosong
             
                     with st.spinner("🔽 Mengunduh model hasil optimasi PSO..."):
                         try:
                             import gdown
                             url = f"https://drive.google.com/uc?id={drive_id}"
-                            gdown.download(url, model_path_pso, quiet=False, fuzzy=True)
+                            gdown.download(url, model_path, quiet=False, fuzzy=True)
                         except Exception as e:
                             st.error(f"Gagal mengunduh model dari Google Drive: {e}")
                 
                 # Cek dan load file model PSO
-                if os.path.exists(model_path_pso):
+                if os.path.exists(model_path) and os.path.getsize(model_path) > 0:
                     try:
-                        with open(model_path_pso, "rb") as f:
+                        with open(model_path, "rb") as f:
                             model_data = pickle.load(f)
 
                         model_rf_pso = model_data.get("model")
