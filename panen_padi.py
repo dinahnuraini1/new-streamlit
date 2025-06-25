@@ -428,7 +428,7 @@ def main():
 
             # Dropdown untuk pilih rasio
             selected_rasio_label = st.selectbox("Pilih rasio data latih dan uji:", list(rasio_opsi_pso.keys()))
-            model_path_pso = rasio_opsi_pso[selected_rasio_label]
+            file_ref = rasio_opsi_pso[selected_rasio_label]
 
             # Hitung dan tampilkan jumlah data train-test
             total_data = len(st.session_state["X"])
@@ -444,41 +444,38 @@ def main():
 
             st.info(f"Jumlah data latih: {train_count}")
             st.info(f"Jumlah data uji: {test_count}")
+
+            model_dir = "model"
+            os.makedirs(model_dir, exist_ok=True)
+            model_path_pso = f"rfpso_{selected_rasio_label.replace(':', '').replace('/', '')}.pkl"
+
             
             tab1_pso, tab2_pso = st.tabs(["📂 Hasil Optimasi PSO", "📌 Parameter Model PSO"])
             with tab1_pso:
-                model_dir = "model"
-                os.makedirs(model_dir, exist_ok=True)
-                filename = f"rfpso_{selected_rasio_label.replace(':', '').replace('/', '')}.pkl"
-                model_path = os.path.join(model_dir, filename)
-                drive_id = rasio_opsi_pso[selected_rasio_label]
-
+                
                 # Jika file belum ada, unduh dari Google Drive
-                if not os.path.exists(model_path) or os.path.getsize(model_path) == 0:
-                    if os.path.exists(model_path):
-                        os.remove(model_path)  # hapus file kosong
-            
-                    with st.spinner("🔽 Mengunduh model hasil optimasi PSO..."):
+                if not os.path.exists(model_path_pso) or os.path.getsize(model_path) == 0:
+                    with st.spinner("🔽 Mengunduh model hasil PSO dari Google Drive..."):
                         try:
                             import gdown
-                            url = f"https://drive.google.com/uc?id={drive_id}"
-                            gdown.download(url, model_path, quiet=False, fuzzy=True)
+                            url = f"https://drive.google.com/uc?id={file_ref}"
+                            gdown.download(url, model_path_pso, quiet=False, fuzzy=True)
                         except Exception as e:
                             st.error(f"Gagal mengunduh model dari Google Drive: {e}")
+                            st.stop()
                 
                 # Cek dan load file model PSO
-                if os.path.exists(model_path):
+                if os.path.exists(model_path_pso):
                     try:
                         with open(model_path, "rb") as f:
                             model_data = pickle.load(f)
 
                         model_rf_pso = model_data.get("model")
                         params = model_data.get("params", {})
-                        params["max_features"] = float(params.get("max_features", 0))
                         mape_train = model_data.get("mape_train")
                         mape_test = model_data.get("mape_test")
 
-                        if model_rf_pso is not None and isinstance(params, dict) and isinstance(mape_train, (float, int)) and isinstance(mape_test, (float, int)):
+                        if model_rf_pso and mape_train is not None and mape_test is not None:
                             st.subheader("📌 Parameter PSO")
                             st.markdown(f"**Partikel : 100**")
                             st.markdown(f"**Iterasi: 50**")
