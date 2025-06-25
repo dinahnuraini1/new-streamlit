@@ -326,8 +326,8 @@ def main():
 
                         model_rf = model_data.get("model")
                         params = model_data.get("params", {})
-                        mape_train = model_data.get("mape_train")
-                        mape_test = model_data.get("mape_test")
+                        mape_train = params.get("mape_train")
+                        mape_test = params.get("mape_test")
 
                         if model_rf and mape_train is not None and mape_test is not None:
                             # Tampilkan parameter model dalam input field yang tidak bisa diubah (read-only)
