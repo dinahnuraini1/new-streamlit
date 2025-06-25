@@ -474,6 +474,7 @@ def main():
 
                         model_rf_pso = model_data.get("model")
                         params = model_data.get("params", {})
+                        params["max_features"] = float(params.get("max_features", 0))
                         mape_train = model_data.get("mape_train")
                         mape_test = model_data.get("mape_test")
 
