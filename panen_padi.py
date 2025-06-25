@@ -502,7 +502,7 @@ def main():
                                 st.error("❌ Nilai MAPE Testing dalam kategori **BURUK** ")
 
                         else:
-                            st.error("Parameter model atau nilai MAPE tidak ditemukan.")
+                            st.error("Parameter model atau nilai MAPE tidak ditemukaNn.")
                     except Exception as e:
                         st.error(f"Terjadi kesalahan saat memuat model: {e}")
                 else:
