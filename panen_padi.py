@@ -462,8 +462,7 @@ def main():
                             gdown.download(url, model_path_pso, quiet=False, fuzzy=True)
                         except Exception as e:
                             st.error(f"Gagal mengunduh model dari Google Drive: {e}")
-                            st.stop()
-                
+                              
                 # Cek dan load file model PSO
                 if os.path.exists(model_path_pso):
                     try:
