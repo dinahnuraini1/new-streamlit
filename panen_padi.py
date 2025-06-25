@@ -10,6 +10,7 @@ import time
 import joblib
 import os
 import altair as alt
+import gdown
 
 # STREAMLIT
 def main():
