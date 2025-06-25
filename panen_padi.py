@@ -281,6 +281,8 @@ def main():
             # Pilihan rasio dari dropdown
             selected_rasio_label = st.selectbox("Pilih rasio data latih dan uji:", list(rasio_opsi.keys()))
             selected_rasio = rasio_opsi[selected_rasio_label]
+            test_size = selected_rasio["test_size"]Add commentMore actions
+            drive_id = selected_rasio["drive_id"]
 
              # Split data hanya untuk info, bukan buat latih ulang
             X = st.session_state["X"]
@@ -289,6 +291,10 @@ def main():
             X_train, X_test, y_train, y_test = train_test_split(
                 X, y, test_size=selected_rasio["test_size"], random_state=42
             )
+            # Unduh file model jika belum ada
+            model_dir = "model"
+            os.makedirs(model_dir, exist_ok=True)
+            model_path = f"{model_dir}/model_rf_{selected_rasio_label.replace(':', '')}.pkl"
 
             # Hitung jumlah data
             total_data = len(st.session_state["X"])
@@ -300,9 +306,6 @@ def main():
 
             tab1, tab2 = st.tabs(["📂 Hasil Load Model", "🛠️ Input Manual RF"])
             with tab1:
-                model_dir = "model"
-                os.makedirs(model_dir, exist_ok=True)
-                model_path = f"{model_dir}/model_rf_{selected_rasio_label.replace(':', '')}.pkl"
                 if not os.path.exists(model_path) or os.path.getsize(model_path) == 0:
                     if os.path.exists(model_path):
                         os.remove(model_path)
@@ -322,8 +325,8 @@ def main():
 
                         model_rf = model_data.get("model")
                         params = model_data.get("params", {})
-                        mape_train = model_data.get("mape_train")
-                        mape_test = model_data.get("mape_test")
+                        mape_train = params.get("mape_train")
+                        mape_test = params.get("mape_test")
 
                         if model_rf and params and mape_train is not None and mape_test is not None:
                             # Tampilkan parameter model dalam input field yang tidak bisa diubah (read-only)
