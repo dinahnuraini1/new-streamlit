@@ -17,7 +17,7 @@ def main():
    
        
     # Sidebar Menu
-    st.sidebar.image("image/panen.png", width=200) 
+    st.sidebar.image("panen.png", width=200) 
    # Menambahkan judul besar di sidebar
     st.sidebar.markdown("<h2 style='font-size: 24px;'> select menu</h2>", unsafe_allow_html=True)
 
@@ -263,11 +263,11 @@ def main():
         else:
             # Mapping rasio -> test_size dan file model
             rasio_opsi = {
-                "50:50": {"test_size": 0.5, "model_data": "model/rf_5mean2.pkl"},
-                "60:40": {"test_size": 0.4, "model_data": "model/rf_4mean.pkl"},
-                "70:30": {"test_size": 0.3, "model_data": "model/rf_3mean2.pkl"},
-                "80:20": {"test_size": 0.2, "model_data": "model/rf_2mean.pkl"},
-                "90:10": {"test_size": 0.1, "model_data": "model/rf_1mean2.pkl"},
+                "50:50": {"test_size": 0.5, "drive_id": "1rHVRZ9rR8UbMgG4ur4Uq69lh7b__i0vH"},
+                "60:40": {"test_size": 0.4, "drive_id": "1QkdiFoijSEOj8tE5Rc5-hTUb8s8RM64_"},
+                "70:30": {"test_size": 0.3, "drive_id": "1ze6iQyYKBLOX1kkOgD6mvjFy8o-jS8Om"}, 
+                "80:20": {"test_size": 0.2, "drive_id": "1EAbMoYPaDzTfT4PL4IcBt_L1cRwYhhjr"},
+                "90:10": {"test_size": 0.1, "drive_id": "1U_Gi0FFSGMrPQpRGIzEmA1ZoIjVi2OvX"},
             }
 
             # Pilihan rasio dari dropdown
@@ -394,11 +394,11 @@ def main():
 
             # Mapping rasio ke file model hasil optimasi
             rasio_opsi_pso = {
-                "50:50": "model/rfpso_5mean2.pkl",
-                "60:40": "model/rfpso_4mean.pkl",
-                "70:30": "model/rfpso_3mean.pkl",
-                "80:20": "model/rfpso_2mean.pkl",
-                "90:10": "model/rfpso_1mean2.pkl",
+                "50:50": "1Kax1ZcS0toPrQQR7KLZwCjZFBZ2MwezM",
+                "60:40": "1D9vyfEQ2Bi8wST39GkgmjNMOqeweRcQb",
+                "70:30": "1QJgDuqKUbizKyNLVCxtiaVvfjQeJSy_g",
+                "80:20": "1x-CBDynz1IGXFKlAtlGUlt7WYx21XVbi",
+                "90:10": "1lnY0GytPzY66S2JAMTdHWztTqiwcTCkm",
             }
 
             # Dropdown untuk pilih rasio
