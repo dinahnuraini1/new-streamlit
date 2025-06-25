@@ -447,6 +447,24 @@ def main():
             
             tab1_pso, tab2_pso = st.tabs(["📂 Hasil Optimasi PSO", "📌 Parameter Model PSO"])
             with tab1_pso:
+                model_dir = "model"
+                os.makedirs(model_dir, exist_ok=True)
+                filename = f"rfpso_{selected_rasio_label.replace(':', '').replace('/', '')}.pkl"
+                model_path = os.path.join(model_dir, filename)
+
+                # Jika file belum ada, unduh dari Google Drive
+                if not os.path.exists(model_path) or os.path.getsize(model_path) == 0:
+                    if os.path.exists(model_path):
+                        os.remove(model_path)  # hapus file kosong
+            
+                    with st.spinner("🔽 Mengunduh model hasil optimasi PSO..."):
+                        try:
+                            import gdown
+                            url = f"https://drive.google.com/uc?id={model_path_pso}"
+                            gdown.download(url, model_path, quiet=False, fuzzy=True)
+                        except Exception as e:
+                            st.error(f"Gagal mengunduh model dari Google Drive: {e}")
+                
                 # Cek dan load file model PSO
                 if os.path.exists(model_path_pso):
                     try:
@@ -466,12 +484,7 @@ def main():
                             st.markdown(f"**C2: 1.49618**")
                             st.markdown(f"**Inertia: 0.7**")
 
-
-
-                            st.subheader("📌 Parameter Hasil Optimasi (PSO)")
-
-                            # Tampilkan parameter hasil PSO (readonly)
-                
+                            st.subheader("📌 Parameter Hasil Optimasi (PSO)")             
                             st.markdown(f"**Jumlah pohon (n_estimators):** {params.get('n_estimators', 0)}")
                             st.markdown(f"**Kedalaman maksimum pohon (max_depth):** {params.get('max_depth', 0)}")
                             st.markdown(f"**Fitur maksimum (max_features):** {params.get('max_features', 0)}")
