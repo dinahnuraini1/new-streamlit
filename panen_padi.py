@@ -281,7 +281,7 @@ def main():
             # Pilihan rasio dari dropdown
             selected_rasio_label = st.selectbox("Pilih rasio data latih dan uji:", list(rasio_opsi.keys()))
             selected_rasio = rasio_opsi[selected_rasio_label]
-            test_size = selected_rasio["test_size"]Add commentMore actions
+            test_size = selected_rasio["test_size"]
             drive_id = selected_rasio["drive_id"]
 
              # Split data hanya untuk info, bukan buat latih ulang
@@ -325,8 +325,8 @@ def main():
 
                         model_rf = model_data.get("model")
                         params = model_data.get("params", {})
-                        mape_train = params.get("mape_train")
-                        mape_test = params.get("mape_test")
+                        mape_train = model_data.get("mape_train")
+                        mape_test = model_data.get("mape_test")
 
                         if model_rf and params and mape_train is not None and mape_test is not None:
                             # Tampilkan parameter model dalam input field yang tidak bisa diubah (read-only)
