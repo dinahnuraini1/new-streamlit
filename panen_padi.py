@@ -468,6 +468,7 @@ def main():
                     try:
                         with open(model_path_pso, "rb") as f:
                             model_data = pickle.load(f)
+                            st.write ("isi pickle:",model_data)
 
                         model_rf_pso = model_data.get("model")
                         params = model_data.get("params", {})
