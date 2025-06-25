@@ -292,7 +292,9 @@ def main():
 
             tab1, tab2 = st.tabs(["📂 Hasil Load Model", "🛠️ Input Manual RF"])
             with tab1:
-                model_path = selected_rasio["model_data"]  # path file model
+                 model_dir = "model"
+                os.makedirs(model_dir, exist_ok=True)
+                model_path = f"{model_dir}/model_rf_{selected_rasio_label.replace(':', '')}.pkl"
 
                 if os.path.exists(model_path):
                     try:
