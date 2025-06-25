@@ -12,11 +12,11 @@ import os
 import altair as alt
 import gdown
 
-# Fungsi untuk memuat objek dari file pickleAdd commentMore actions
-def load_pickle(file_path):
-    with open(file_path, 'rb') as file:
-        obj = pickle.load(file)
-    return obj
+# Fungsi untuk memuat objek dari file pickle
+# def load_pickle(file_path):
+#     with open(file_path, 'rb') as file:
+#         obj = pickle.load(file)
+#     return obj
 
 
 # STREAMLIT
@@ -289,14 +289,10 @@ def main():
             y = st.session_state["y"]
 
             X_train, X_test, y_train, y_test = train_test_split(
-                X, y, test_size=selected_rasio["test_size"], random_state=42
+                X, y, test_size=test_size, random_state=42
             )
-            # Unduh file model jika belum ada
-            model_dir = "model"
-            os.makedirs(model_dir, exist_ok=True)
-            model_path = f"{model_dir}/model_rf_{selected_rasio_label.replace(':', '')}.pkl"
 
-            # Hitung jumlah data
+             # Hitung jumlah data
             total_data = len(st.session_state["X"])
             train_count = int((1 - selected_rasio["test_size"]) * total_data)
             test_count = int(selected_rasio["test_size"] * total_data)
@@ -304,16 +300,21 @@ def main():
             st.info(f"Jumlah data latih: {train_count}")
             st.info(f"Jumlah data uji: {test_count}")
 
+            
+            # Unduh file model jika belum ada
+            model_dir = "model"
+            os.makedirs(model_dir, exist_ok=True)
+            model_path = f"{model_dir}/model_rf_{selected_rasio_label.replace(':', '')}.pkl"
+ 
+
             tab1, tab2 = st.tabs(["📂 Hasil Load Model", "🛠️ Input Manual RF"])
             with tab1:
                 if not os.path.exists(model_path) or os.path.getsize(model_path) == 0:
                     if os.path.exists(model_path):
                         os.remove(model_path)
                     with st.spinner("🔽 Mengunduh model dari Google Drive..."):
-                        drive_id = selected_rasio["drive_id"]  # ← tambahkan ini dulu
-                        url = f"https://drive.google.com/uc?id={drive_id}"
                         try:
-                            import gdown
+                            url = f"https://drive.google.com/uc?id={drive_id}"
                             gdown.download(url, model_path, quiet=False, fuzzy=True)
                         except Exception as e:
                             st.error(f"Gagal mengunduh model: {e}")
@@ -328,7 +329,7 @@ def main():
                         mape_train = model_data.get("mape_train")
                         mape_test = model_data.get("mape_test")
 
-                        if model_rf and params and mape_train is not None and mape_test is not None:
+                        if model_rf and mape_train is not None and mape_test is not None:
                             # Tampilkan parameter model dalam input field yang tidak bisa diubah (read-only)
                             st.subheader("📌 Parameter Model Random Forest")
                             st.markdown(f"**Jumlah pohon (n_estimators):** {params.get('n_estimators', 0)}")
@@ -354,13 +355,13 @@ def main():
 
                 if st.button("Latih Model"):
                     try:
-                        X = st.session_state["X"]
-                        y = st.session_state["y"]
+                        # X = st.session_state["X"]
+                        # y = st.session_state["y"]
                         scaler_y = st.session_state["scaler_y"]
 
                         # Split ulang dengan rasio yang dipilih
                         X_train, X_test, y_train, y_test = train_test_split(
-                            X, y, test_size=selected_rasio["test_size"], random_state=42
+                            X, y, test_size=test_size, random_state=42
                         )
 
                         rf = RandomForestRegressor(
